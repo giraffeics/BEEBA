@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name custom)(type KiCad)(uri D:\KiCAD\library\custom.pretty)(options "")(descr ""))
+  (lib (name xo_14s)(type Legacy)(uri D:\KiCAD\library\clock_oscillator_x014s\xo_14s.mod)(options "")(descr ""))
+)

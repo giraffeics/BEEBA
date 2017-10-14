@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name custom)(type KiCad)(uri D:\KiCAD\library\custom.pretty)(options "")(descr ""))
+  (lib (name dip-s)(type KiCad)(uri E:\KiCAD\library\dip-s.pretty)(options "")(descr ""))
+)

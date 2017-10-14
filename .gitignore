@@ -1,0 +1,8 @@
+*erber/
+*.kicad_pcb-bak
+*.lib
+*.bak
+*.ses
+*.dsn
+*.zip
+*.pdf
