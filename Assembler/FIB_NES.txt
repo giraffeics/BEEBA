@@ -1,0 +1,71 @@
+set progp_mosb to 00        This program calculates the values of the fibonacci sequence. The B button of NES controller 1 is used to iterate through the sequence.
+set progp_misb to 00
+set gpr_1 to 00
+set gpr_3 to 00
+set null to 00
+set gpr_2 to 01
+set gpr_4 to 01
+set null to 01
+mark loop_begin
+set led_color to 01
+set null to 01
+copy gpr_2 to io_lesb		DISPLAY N1 (GPR_1 AND GPR_2)
+copy gpr_2 to null
+copy gpr_1 to io_mosb
+copy gpr_1 to null
+set alu_func to 00			CALCULATE NEXT N2 (GPR_3 AND GPR_4) VALUE
+set alu_c to 00
+set null to 00
+copy gpr_2 to alu_a
+copy gpr_4 to alu_b
+copy alu_a to gpr_4
+copy alu_c to gpr_5
+copy gpr_5 to alu_c
+copy gpr_1 to alu_a
+copy gpr_3 to alu_b
+copy alu_a to gpr_3
+set gpr_6 to marker disp_n2:0	STORE RETURN POSITION FOR FUNCTION CALL
+set null to marker disp_n2:0
+set progp_lesb to marker wait_func:0
+set null to marker wait_func:0
+set progp_change to 01
+mark disp_n2
+set led_color to 02
+set null to 02
+copy gpr_4 to io_lesb		DISPLAY N2 (GPR_3 AND GPR_4)
+copy gpr_4 to null
+copy gpr_3 to io_mosb
+copy gpr_3 to null
+set alu_func to 00			CALCULATE NEXT N1 (GPR_1 AND GPR_2) VALUE
+set alu_c to 00
+set null to 00
+copy gpr_2 to alu_a
+copy gpr_4 to alu_b
+copy alu_a to gpr_2
+copy alu_c to gpr_5
+copy gpr_5 to alu_c
+copy gpr_1 to alu_a
+copy gpr_3 to alu_b
+copy alu_a to gpr_1
+set gpr_6 to marker loop_begin:0	STORE RETURN POSITION FOR FUNCTION CALL
+set null to marker loop_begin:0
+set progp_lesb to marker wait_func:0
+set null to marker wait_func:0
+set progp_change to 01
+mark wait_func				THIS PROGRAM USES RUDIMENTARY FUNCTION CALLING. CODE TO WAIT FOR BUTTON PRESS GOES HERE.
+set alu_func to 09		SHIFT BITS TO READ NES CONTROLLER
+set alu_c to 09			SHIFT 9 BITS LEFT (7 RIGHT); READ B BUTTON
+set null to 09
+mark unpressed_begin		WAIT FOR BUTTON TO BE PRESSED
+copy player_1 to alu_a
+set progp_lesb to marker pressed_begin:0
+set null to marker pressed_begin:0
+copy alu_a to progp_change
+set progp_lesb to marker unpressed_begin:0
+set null to marker unpressed_begin:0
+set progp_change to 01
+mark pressed_begin			WAIT FOR BUTTON TO BE UNPRESSED
+copy player_1 to alu_a
+copy alu_a to progp_change
+copy gpr_6 to progp_lesb	RETURN TO PLACE THAT WE NEED TO RETURN TO
+set progp_change to 01

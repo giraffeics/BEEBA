@@ -1,0 +1,8 @@
+set progp_mosb to 00
+set progp_misb to 00
+set null to 00
+set progp_lesb to marker loop_begin:0
+set null to marker loop_begin:0
+mark loop_begin
+copy io_btn to led_color
+set goto to 01

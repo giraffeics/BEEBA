@@ -1,0 +1,40 @@
+set progp_mosb to 00		INITIALIZATION
+set progp_misb to 00
+set null to 00
+mark loop_begin
+copy player_1 to alu_a		READ NES CONTROLLER AND INVERT VALUES
+set alu_func to 08
+set null to 08
+copy alu_c to gpr_14
+copy gpr_14 to alu_a
+set gpr_14 to 00			INITIALIZE GPR 14 AND 15: THESE WILL BE USED TO PROPERLY INCREMENT OR DECREMENT
+set gpr_15 to 00
+set null to 00
+set alu_func to 09			EVALUATE NES CONTROLLER
+set null to 09
+set alu_c to 0F				SHIFT BY 15 LEFT (1 RIGHT); GET RIGHT BUTTON VALUE
+set null to 0F
+set progp_lesb to marker right_not_pressed:0	SEE IF RIGHT BUTTON IS PRESSED
+set null to marker right_not_pressed:0
+copy alu_a to progp_change
+set gpr_14 to 01			SET GPR_14 AND GPR_15 TO INCREMENT VALUE
+set null to 01
+set gpr_15 to 00
+set null to 00
+mark right_not_pressed
+set alu_c to 0E				SHIFT 14 LEFT (2 RIGHT); GET LEFT BUTTON VALUE
+set null to 0E
+set progp_lesb to marker left_not_pressed:0		SEE IF LEFT BUTTON IS PRESSED
+set null to marker left_not_pressed:0
+copy alu_a to progp_change
+set gpr_14 to FF			SET GPR_14 AND GPR_15 TO DECREMENT VALUE
+set gpr_15 to FF
+set null to FF
+mark left_not_pressed
+copy gpr_14 to io_lesb		READ OUT GPR_14 AND GPR_15
+copy gpr_14 to null
+copy gpr_15 to io_mosb
+copy gpr_15 to null
+set progp_lesb to marker loop_begin:0			RESTART LOOP
+set null to marker loop_begin:0
+set progp_change to 01
